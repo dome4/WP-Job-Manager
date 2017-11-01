@@ -62,17 +62,14 @@ class WP_Job_Manager_Install {
 		}
 
 		if ( is_object( $wp_roles ) ) {
-			add_role( 'employer', __( 'Employer', 'wp-job-manager' ), array(
-				'read'         => true,
-				'edit_posts'   => false,
-				'delete_posts' => false
-			) );
 
 			$capabilities = self::get_core_capabilities();
 
 			foreach ( $capabilities as $cap_group ) {
 				foreach ( $cap_group as $cap ) {
 					$wp_roles->add_cap( 'administrator', $cap );
+                    $wp_roles->add_cap( 'editor', $cap );
+                    $wp_roles->add_cap( 'author', $cap );
 				}
 			}
 		}
